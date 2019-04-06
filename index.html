@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="./js/bart.js"></script>
+<script src="./countdown/jquery.countdown.js"></script>
+<script src="./countdown/jquery.countdown.min.js"></script>
+
+<style>
+.all{
+	padding:30px;
+}
+
+.departStat{
+	float: right;	
+	width: 50%;
+}
+
+.trainInfo{
+	float: left;
+	width: 50%;
+}
+
+.foot{
+	position: absolute;
+	bottom: 0px;
+}
+</style>
+
+<title>Bart Schedule</title>
+</head>
+
+<body class="all">
+
+<section>
+	<h1>Bart Schedule</h1>
+	<script type="text/javascript">
+		visitNum = localStorage.getItem("visitNum");
+		if (visitNum == null) {
+			localStorage.setItem("visitNum", 1);
+			document.write("<h3>Welcome</h3>");
+		} else {
+			localStorage.setItem("visitNum", ++visitNum);
+			document.write("<h3>Welcome back. You visited "+visitNum+" times.</h3>");
+		}
+		
+	</script>
+
+	<form method="POST">
+		from <select id="srcStations" name="srcStations"></select>
+		to <select id="desStations" name="desStations"></select>
+		<input id="searchbtn" type="button" name="submit" value="Submit" onclick="search()">
+	</form>
+</section>
+
+
+<section>
+	<div class="trainInfo">
+		<h4>Trains Information</h4>
+		<ul id="trainInfo"></ul>
+	</div>
+
+	<aside class="departStat">
+		<h4>Departure Station Information</h4>
+		<div id="countDown"> </div>
+		<div id="srcStationInfo"> </div>
+
+	</aside>
+
+</section>
+<div id="googleMap" style="width:100%;height:400px;"></div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiy0r_-S1r1Je7lUlAY9gYUdGntaisJo8"></script>
+
+<footer>
+	<p class="foot"> by Letty Li</p>
+</footer>
+
+</body>
+</html>
+
+
+
+<!-- 
+	Part 5: The Same-Origin Policy
+	why is it possible for your website to load and display data from the BART API?
+
+	When the browser enforces the SOP, there are some exceptions that SOP is not enforced.
+	In the assignment, we are using a similar way.
+	JSONP dynamically injects <script> tages to send a request to any domain,
+		while the parameters of the requests are added as URL query parameters.
+		since the same origin policy doesn't apply to <script> tags, we can use BART API easily.
+
+	Reference: https://stackoverflow.com/questions/14159154/how-do-rest-apis-work-with-javascript-when-the-same-origin-policy-exists-for-bro
+
+-->
+
